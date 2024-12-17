@@ -2,7 +2,7 @@
 // in the arach such that nums[i] = nums[j] and the absolute difference between i and j is at most k
 
 
-
+// Tim nhung con so nearby duplicate, vi du nhu k = 3, trong [1,2,3,1] thi tu index 0 toi index 4 co 3 <= k=3 ok
 
 import java.util.HashMap;
 
