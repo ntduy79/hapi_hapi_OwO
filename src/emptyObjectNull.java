@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class emptyObjectNull {
 //    2727. Is Object Empty
 //            Solved
@@ -30,11 +35,33 @@ public class emptyObjectNull {
      * @param {Object|Array} obj
      * @return {boolean}
      */
-    var isEmpty = function(obj) {
-        if (Array.isArray(obj)) {
-            return obj.length === 0;
-        } else {
-            return Object.keys(obj).length === 0;
+  import java.util.*;
+
+    public class Utils {
+
+        public static boolean isEmpty(Object obj) {
+            if (obj instanceof List<?>) {
+                return ((List<?>) obj).isEmpty();
+            } else if (obj instanceof Map<?, ?>) {
+                return ((Map<?, ?>) obj).isEmpty();
+            } else if (obj instanceof Object[]) {
+                return ((Object[]) obj).length == 0;
+            } else {
+                // Optional: throw exception or return true for unsupported types
+                return true;
+            }
         }
-    };
+
+        // Test the method
+        public static void main(String[] args) {
+            List<Integer> list = new ArrayList<>();
+            Map<String, String> map = new HashMap<>();
+            String[] array = new String[0];
+
+            System.out.println(isEmpty(list));  // true
+            System.out.println(isEmpty(map));   // true
+            System.out.println(isEmpty(array)); // true
+        }
+    }
+
 }
