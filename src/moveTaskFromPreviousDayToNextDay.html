@@ -1,0 +1,109 @@
+<ul id="task-list">
+    <li> thu 2
+        <ul id="thu-2-tasks"></ul>
+    </li>
+    <li> thu 3
+        <ul id="thu-3-tasks"></ul>
+    </li>
+    <li> thu 4
+        <ul id="thu-4-tasks"></ul>
+    </li>
+    <li> thu 5
+        <ul id="thu-5-tasks"></ul>
+    </li>
+    <li> thu 6
+        <ul id="thu-6-tasks"></ul>
+    </li>
+    <li> thu 7
+        <ul id="thu-7-tasks"></ul>
+    </li>
+    <li> chu nhat
+        <ul id="chu-nhat-tasks"></ul>
+    </li>
+</ul>
+
+<!-- Input fields for adding tasks -->
+<div>
+    <label for="day-select">Select Day:</label>
+    <select id="day-select">
+        <option value="thu-2-tasks">thu 2</option>
+        <option value="thu-3-tasks">thu 3</option>
+        <option value="thu-4-tasks">thu 4</option>
+        <option value="thu-5-tasks">thu 5</option>
+        <option value="thu-6-tasks">thu 6</option>
+        <option value="thu-7-tasks">thu 7</option>
+        <option value="chu-nhat-tasks">chu nhat</option>
+    </select>
+    <input type="text" id="task-input" placeholder="Enter task">
+    <button onclick="addTask()">Add Task</button>
+    <button onclick="endTask()">Task is done</button>
+    <button onclick="nextDay()">Skip Day</button>
+
+</div>
+
+<script>
+    function getSelectedDayAndTasks() {
+        const daySelect = document.getElementById('day-select');
+        const selectedDayId = daySelect.value;
+        const selectedDay = document.getElementById(selectedDayId);
+        return { selectedDayId, selectedDay };
+    }
+
+    function addTask() {
+        const { selectedDay } = getSelectedDayAndTasks();
+        const taskInput = document.getElementById('task-input');
+
+        if (taskInput.value.trim() !== '') {
+            const newTask = document.createElement('li');
+            newTask.textContent = taskInput.value;
+            selectedDay.appendChild(newTask);
+            taskInput.value = ''; // Clear the input field
+        } else {
+            alert('Please enter a task.');
+        }
+    }
+
+    function endTask() {
+        const { selectedDay } = getSelectedDayAndTasks();
+        const tasks = selectedDay.getElementsByTagName('li');
+
+        if (tasks.length > 0) {
+            const lastTask = tasks[tasks.length - 1];
+            lastTask.style.textDecoration = 'line-through';
+            lastTask.style.color = 'green';
+        } else {
+            alert('No tasks to mark as done.');
+        }
+    }
+
+    function nextDay() {
+        const days = [
+            'thu-2-tasks',
+            'thu-3-tasks',
+            'thu-4-tasks',
+            'thu-5-tasks',
+            'thu-6-tasks',
+            'thu-7-tasks',
+            'chu-nhat-tasks'
+        ];
+
+        const daySelect = document.getElementById('day-select');
+        const currentDayIndex = days.indexOf(daySelect.value);
+
+        if (currentDayIndex === -1 || currentDayIndex === days.length - 1) {
+            alert("Can't skip day, already at the end of the week!");
+            return;
+        }
+
+        const currentDay = document.getElementById(days[currentDayIndex]);
+        const nextDay = document.getElementById(days[currentDayIndex + 1]);
+
+        // Move all tasks to the next day
+        while (currentDay.firstChild) {
+            nextDay.appendChild(currentDay.firstChild);
+        }
+
+        // Update the selected day in dropdown (optional)
+        daySelect.value = days[currentDayIndex + 1];
+    }
+</script>
