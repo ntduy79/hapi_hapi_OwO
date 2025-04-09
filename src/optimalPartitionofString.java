@@ -46,4 +46,3 @@ public class optimalPartitionofString(String s) {
 
         return result + (seen.isEmpty() ? 0 : 1);
 }
-}
