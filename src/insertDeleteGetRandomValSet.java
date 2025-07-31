@@ -1,3 +1,5 @@
+import java.util.*;
+
 class RandomizedSet {
     private List<Integer> list; // List to store elements
     private Map<Integer, Integer> map; // Map to store element and its index
